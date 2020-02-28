@@ -1,12 +1,32 @@
 RSpec.describe Api::V1::RandomNumbersController, type: :controller do
+  include Committee::Test::Methods
+
   subject { response.body }
 
   let(:min) { -1.0 }
   let(:max) { 2.0 }
 
+  let(:schema_path) { Rails.root.join('/docs/scheme.json') }
+  let(:last_response) { response }
+  let(:last_request) { request }
+
+  def committee_options
+    @committee_options ||= { schema: Committee::Drivers.load_from_file('docs/schema.json'),
+                             validate_success_only: true }
+  end
+
+  def request_object
+    last_request
+  end
+
   describe '#show' do
     context 'when it have all the arguments' do
       context 'when arguments are valid' do
+        it 'should conforms scheme' do
+          get :show, params: { min: min, max: max }
+          assert_schema_conform
+        end
+
         it 'should return status 200' do
           get :show, params: { min: min, max: max }
           expect(response).to have_http_status(:ok)
