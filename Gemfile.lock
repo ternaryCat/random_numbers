@@ -269,6 +269,7 @@ DEPENDENCIES
   bundler-audit
   byebug
   capybara
+  dry-initializer
   dry-validation
   listen (>= 3.0.5, < 3.2)
   pry-rails
