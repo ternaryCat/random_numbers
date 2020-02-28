@@ -1,0 +1,38 @@
+{
+  "description": "Generating random numbers",
+  "href": "/api/v1/random_number",
+  "method": "GET",
+  "rel": "self",
+  "title": "Generating",
+  "targetSchema": {
+    "type": [
+      "object"
+    ],
+    "properties": {
+      "min": {
+        "type": [
+          "number"
+        ]
+      },
+      "max": {
+        "type": [
+          "number"
+        ]
+      }
+    },
+    "responses" : {
+      "200" : {
+        "schema" : {
+          "type" : "object",
+          "properties": {
+            "number": {
+              "type": [
+                "number"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
