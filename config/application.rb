@@ -32,6 +32,10 @@ module RandomNumber
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+
+    config.middleware.use Committee::Middleware::RequestValidation, schema_path: 'docs/schema.json'
+    config.middleware.use Committee::Middleware::ResponseValidation, schema_path: 'docs/schema.json'
+
     config.api_only = true
   end
 end
