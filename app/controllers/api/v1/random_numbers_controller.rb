@@ -10,7 +10,14 @@ module Api
       private
 
       def random_numbers_params
-        params.permit(:min, :max).to_h.map { |key, value| [key.to_sym, value.to_f] }.to_h
+        params.permit(:min, :max).to_h.map { |key, value| [key.to_sym, safe_to_f(value)] }.to_h
+      end
+
+      def safe_to_f(value)
+        float_value = value.to_f
+        return float_value if value == float_value.to_s
+
+        nil
       end
     end
   end
